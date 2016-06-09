@@ -1,6 +1,7 @@
 import json
 import urllib
-import collections
+
+from mako import template
 
 
 ROOT_URL = 'https://api.github.com/organizations/324574/repos?page='
@@ -41,32 +42,8 @@ def get_from_github():
 
 
 def make_html():
-    cols = collections.OrderedDict()
-    cols['id'] = 'id'
-    cols['forks_count'] = 'forks'
-    cols['watchers_count'] = 'stars'
-    cols['name'] = 'name'
-    cols['created_at'] = 'create'
-    cols['description'] = 'description'
-
-    # Generate thead
-    thead = ''
-    for col in cols.values():
-        thead += '<td>%s</td>' % col
-
-    # Generate tbody
-    tbody = ''
-    for repo in REPOS:
-        line = '<tr>'
-        for col in cols.keys():
-            line += '<td>%s</td>' % repo.get(col, '')
-        line += '</tr>\n'
-
-        tbody += line
-
-    with open(TPL, 'r') as template_file:
-        tpl = template_file.read()
-        result = tpl % {'thead': thead, 'tbody': tbody}
+    tpl = template.Template(filename=TPL)
+    result = tpl.render(repos=REPOS)
 
     print 'Write html...'
     with open(OUTPUT_HTML, 'w') as output:
@@ -75,6 +52,9 @@ def make_html():
 
 
 def read_from_file():
+    """
+    A method used to debuging
+    """
     global REPOS
     with file(OUTPUT, 'r') as infile:
         REPOS = json.loads(infile.read())
@@ -82,7 +62,6 @@ def read_from_file():
 
 def main():
     get_from_github()
-    read_from_file()
     make_html()
 
 
