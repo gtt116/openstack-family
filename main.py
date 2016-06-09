@@ -16,7 +16,7 @@ def parse_one_page(page_body):
     REPOS.extend(repos)
 
     # if exceeds github rate limit, repos will be a dict.
-    if not repos or isinstance(repos, list):
+    if not repos or isinstance(repos, dict):
         return False
     else:
         return True
@@ -25,8 +25,9 @@ def parse_one_page(page_body):
 def get_from_github():
     page = 1
     while True:
-        print 'Loading page: %s' % page
-        response = urllib.urlopen(ROOT_URL + str(page))
+        url = ROOT_URL + str(page)
+        print 'Loading page: %s' % url
+        response = urllib.urlopen(url)
         body = response.read()
         if not parse_one_page(body):
             break
@@ -80,7 +81,7 @@ def read_from_file():
 
 
 def main():
-#    get_from_github()
+    get_from_github()
     read_from_file()
     make_html()
 
