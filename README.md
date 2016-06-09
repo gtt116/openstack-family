@@ -18,6 +18,8 @@ By reading this information you learn some thing about the ecosystem of OpenStac
     # Open a browser to view openstack.html
 ```
 
+An example demo from
+[here](https://rawgit.com/gtt116/openstack-family/master/openstack.html)
 
 ## How it works
 
