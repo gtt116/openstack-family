@@ -1,0 +1,39 @@
+<!html>
+<head>
+  <title>OpenStack Family</title>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="http://cdn.bootcss.com/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script src="http://cdn.bootcss.com/datatables/1.10.12/js/dataTables.bootstrap4.min.js"></script>
+
+  <link href="http://cdn.bootcss.com/datatables/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="http://cdn.bootcss.com/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <script>
+  $(document).ready(function(){
+      $('#myTable').DataTable({
+        "paging": false,    
+      });
+  });
+  </script>
+
+  <style>
+  #container {
+    width: 1440px;
+    margin: 50px auto;
+  } 
+  </style>
+</head>
+
+<body>
+<div id="container">
+  <table id="myTable" class="table dataTable">
+    <thead>
+      %(thead)s
+    </thead>  
+    <tbody>
+      %(tbody)s
+    </tbody>
+  </table>
+</div>
+</body>
+
+</html>
